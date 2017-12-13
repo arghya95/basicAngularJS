@@ -1,0 +1,40 @@
+<p>
+  servers works!
+</p>
+<h2>Server No. {{ serverId }} is now {{ serverStatus }}</h2>
+<app-server *ngFor = "let server of servers"></app-server>
+<p>{{ allowNewServer }}</p>
+<p [innerText] = "allowNewServer"></p>
+<!-- <p>{{ onClickStatus }}</p> -->
+<p *ngIf = "serverCreated; else noServer">Server is created,Server name is {{ ServerName }}</p>
+<ng-template #noServer><p>Nothing Server was created</p></ng-template>
+<label>Server Name</label>
+Using Event Binding::
+<input 
+type="text"  
+class="form-control" 
+(input) = "onUpdateServerName($event)"
+>
+<p>{{ ServerName }}</p>
+using Two-way-binding::
+<input 
+type="text" 
+class="form-control" 
+[(ngModel)] = "ServerName"
+>
+<p>{{ ServerName }}</p>
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)= "onClickProperty()">Add Server</button>
+<hr>
+<!-- User Name:::
+<input 
+type="text" 
+class="form-control" 
+[(ngModel)] = "UserName"
+>
+<p>{{ UserName }}</p>
+<button class="btn btn-primary" [disabled]="!UserName" (click)= "resetButton()">Reset</button> -->
+<button class="btn btn-primary"  (click)= "onClickToggle()">Display Details</button>
+<p *ngIf = "display">Secret Password = tuna</p>
+<div *ngFor = "let logs of log; let i = index" 
+[ngStyle] = "{backgroundColor : i >= 4 ? 'blue' : 'transparent'}" 
+[ngClass] = "{'white-text' : i >= 4}">{{ logs }}</div>
